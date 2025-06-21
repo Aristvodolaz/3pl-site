@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                3PL Inventory Dashboard
+                3PL Dashboard
               </h1>
             </div>
             <div className="flex items-center space-x-4">
