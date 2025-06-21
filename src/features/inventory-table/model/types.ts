@@ -13,6 +13,20 @@ export interface PlacedItemDto {
   date_upd: string | null;
 }
 
+// Add minimal item DTO for upload
+export interface AddMinimalItemDto {
+  shk: string;
+  name: string;
+}
+
+// Upload result types
+export interface UploadResult {
+  success: boolean;
+  processed: number;
+  failed: number;
+  errors: string[];
+}
+
 export interface PaginationInfo {
   total: number;
   limit: number;

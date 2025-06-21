@@ -4,9 +4,11 @@ import { FilterPanel } from '../features/inventory-table/ui/FilterPanel';
 import { InventoryTable } from '../features/inventory-table/ui/InventoryTable';
 import { Pagination } from '../features/inventory-table/ui/Pagination';
 import { ExportButton } from '../features/inventory-table/ui/ExportButton';
+import { UploadButton } from '../features/inventory-table/ui/UploadButton';
 import { Button } from '../shared/ui/Button';
 import { Loader } from '../shared/ui/Loader';
 import { getUniqueIspolnitels } from '../features/inventory-table/lib/filterUtils';
+import { UploadResult } from '../features/inventory-table/model/types';
 
 const Dashboard: React.FC = () => {
   const {
@@ -27,6 +29,13 @@ const Dashboard: React.FC = () => {
   } = useInventoryTable();
 
   const { isDark, toggleDarkMode } = useDarkMode();
+
+  const handleUploadComplete = (result: UploadResult) => {
+    if (result.success && result.processed > 0) {
+      // Reload data after successful upload
+      loadData();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -136,7 +145,11 @@ const Dashboard: React.FC = () => {
                   `Показано ${filteredData.length} из ${data.length} записей`
                 )}
               </div>
-              <div className="flex justify-end">
+              <div className="flex items-center space-x-4">
+                <UploadButton
+                  onUploadComplete={handleUploadComplete}
+                  disabled={loading}
+                />
                 <ExportButton
                   data={filteredData}
                   disabled={filteredData.length === 0}
