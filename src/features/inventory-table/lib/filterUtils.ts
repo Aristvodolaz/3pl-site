@@ -4,12 +4,12 @@ import { PlacedItemDto, FilterState } from '../model/types';
 export const filterItems = (items: PlacedItemDto[], filters: FilterState): PlacedItemDto[] => {
   return items.filter((item) => {
     // Search by shk (exact match or partial)
-    if (filters.search && !item.shk.toLowerCase().includes(filters.search.toLowerCase())) {
+    if (filters.search && (!item.shk || !item.shk.toLowerCase().includes(filters.search.toLowerCase()))) {
       return false;
     }
 
     // Filter by name (partial match)
-    if (filters.name && !item.name.toLowerCase().includes(filters.name.toLowerCase())) {
+    if (filters.name && (!item.name || !item.name.toLowerCase().includes(filters.name.toLowerCase()))) {
       return false;
     }
 
@@ -26,7 +26,7 @@ export const filterItems = (items: PlacedItemDto[], filters: FilterState): Place
     }
 
     // Filter by ispolnitel (partial match)
-    if (filters.ispolnitel && !item.ispolnitel.toLowerCase().includes(filters.ispolnitel.toLowerCase())) {
+    if (filters.ispolnitel && (!item.ispolnitel || !item.ispolnitel.toLowerCase().includes(filters.ispolnitel.toLowerCase()))) {
       return false;
     }
 
